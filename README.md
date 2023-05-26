@@ -35,4 +35,4 @@ ex. js-ha / 230522
 [Nextjs official Docs](https://nextjs.org/docs)
 
 
-[MongoDB offical Docs](https://www.mongodb.com/docs/)
+[MongoDB official Docs](https://www.mongodb.com/docs/)
