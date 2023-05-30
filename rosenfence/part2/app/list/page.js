@@ -1,23 +1,22 @@
 import React from 'react';
 import { connectDB } from '@/util/database';
-import Link from 'next/link';
+import ListItem from './ListItem';
 
 const List = async () => {
   const db = (await connectDB).db('forum');
-  const lists = await db.collection('post').find().toArray(); // 데이터 가져오기
+  const lists = await db.collection('post').find().toArray();
+
+  const items = lists.map((list) => {
+    return {
+      _id: list._id.toString(),
+      title: list.title,
+      content: list.content,
+    };
+  });
 
   return (
     <div className='list-bg'>
-      {lists.map((list, i) => {
-        return (
-          <Link className='link' href={`detail/${list._id}`} key={i}>
-            <div className='list-item'>
-              <h4>{list.title}</h4>
-              <p>{list.content}</p>
-            </div>
-          </Link>
-        );
-      })}
+      <ListItem lists={items} />
     </div>
   );
 };
