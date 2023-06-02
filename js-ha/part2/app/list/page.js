@@ -1,7 +1,6 @@
 import { connectDB } from '@/util/database';
 
 import ListItem from './ListItem';
-import { ObjectId } from 'mongodb';
 
 export default async function List() {
   const client = await connectDB;
