@@ -25,6 +25,7 @@ export default async function ListItem({ result }) {
                   })
                   .then((data) => {
                     //! hint : 여기에 console.log(data)를 하면, pages/api/post/delete 에서 보내는 응답을 받을 수 있을거에요
+                    //! '삭제완료'를 받으면 애니메이션을 실행하고, 아닌 경우엔 그냥 놔둔다면?
                     e.target.parentElement.style.opacity = 0;
                     setTimeout(() => {
                       e.target.parentElement.style.display = 'none';
