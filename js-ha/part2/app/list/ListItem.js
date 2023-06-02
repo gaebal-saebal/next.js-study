@@ -14,17 +14,17 @@ export default function ListItem({ result }) {
             <Link href={`/edit/${a._id}`}> ✏️ </Link>
             <span
               onClick={(e) => {
-                // fetch('/api/post/delete', { method: 'DELETE', body: a._id })
-                //   .then((data) => {
-                //     return data.json();
-                //   })
-                //   .then((data) => {
-                //     e.target.parentElement.style.opacity = 0;
-                //     setTimeout(() => {
-                //       e.target.parentElement.style.display = 'none';
-                //     }, 1000);
-                //   });
-                fetch('/api/abe/ha');
+                fetch('/api/post/delete', { method: 'DELETE', body: a._id })
+                  .then((data) => {
+                    return data.json();
+                  })
+                  .then((data) => {
+                    e.target.parentElement.style.opacity = 0;
+                    setTimeout(() => {
+                      e.target.parentElement.style.display = 'none';
+                    }, 1000);
+                  });
+                // fetch('/api/abe/ha');
               }}
             >
               ❌
