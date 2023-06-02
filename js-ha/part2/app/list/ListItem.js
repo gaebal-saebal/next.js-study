@@ -4,6 +4,7 @@ import Link from 'next/link';
 
 // TODO : 본인이 아니어도 삭제하면 지워지지는 않지만 fetch가 실행되니까 일단 지워지는건 작동을 함.
 // 이걸 삼항연산자로 본인이면 지워지고 아니면 그대로 있게끔? 만들면 되지 않을까?
+//! hint : 서버로부터 받는 data를 확인해보세요
 
 export default async function ListItem({ result }) {
   return (
@@ -23,6 +24,7 @@ export default async function ListItem({ result }) {
                     return data.json();
                   })
                   .then((data) => {
+                    //! hint : 여기에 console.log(data)를 하면, pages/api/post/delete 에서 보내는 응답을 받을 수 있을거에요
                     e.target.parentElement.style.opacity = 0;
                     setTimeout(() => {
                       e.target.parentElement.style.display = 'none';
