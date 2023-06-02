@@ -11,6 +11,7 @@ const List = async () => {
       _id: list._id.toString(),
       title: list.title,
       content: list.content,
+      author: list.author,
     };
   });
 

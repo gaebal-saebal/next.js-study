@@ -2,9 +2,12 @@
 import React from 'react';
 import Link from 'next/link';
 
-const ListItem = ({ lists }) => {
+export default function ListItem({ lists }) {
   const handleDelete = (list, e) => {
-    fetch('/api/delete', { method: 'DELETE', body: list._id })
+    fetch('/api/delete', {
+      method: 'DELETE',
+      body: JSON.stringify({ _id: list._id, author: list.author }), //!
+    })
       .then((res) => {
         res.json();
       })
@@ -13,6 +16,9 @@ const ListItem = ({ lists }) => {
         setTimeout(() => {
           e.target.parentElement.style.display = 'none';
         }, 1000);
+      })
+      .catch(() => {
+        console.log('오류');
       });
   };
 
@@ -34,6 +40,4 @@ const ListItem = ({ lists }) => {
       })}
     </div>
   );
-};
-
-export default ListItem;
+}
