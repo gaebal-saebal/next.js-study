@@ -2,7 +2,10 @@
 
 import Link from 'next/link';
 
-export default function ListItem({ result }) {
+// TODO : 본인이 아니어도 삭제하면 지워지지는 않지만 fetch가 실행되니까 일단 지워지는건 작동을 함.
+// 이걸 삼항연산자로 본인이면 지워지고 아니면 그대로 있게끔? 만들면 되지 않을까?
+
+export default async function ListItem({ result }) {
   return (
     <div>
       {result.map((a, i) => {
@@ -12,6 +15,7 @@ export default function ListItem({ result }) {
               <h4>{a.title}</h4>
             </Link>
             <Link href={`/edit/${a._id}`}> ✏️ </Link>
+            {}
             <span
               onClick={(e) => {
                 fetch('/api/post/delete', { method: 'DELETE', body: a._id })
@@ -24,7 +28,6 @@ export default function ListItem({ result }) {
                       e.target.parentElement.style.display = 'none';
                     }, 1000);
                   });
-                // fetch('/api/abe/ha');
               }}
             >
               ❌
