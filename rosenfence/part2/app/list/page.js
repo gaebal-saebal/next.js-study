@@ -12,6 +12,7 @@ const List = async () => {
       title: list.title,
       content: list.content,
       author: list.author,
+      name: list.name,
     };
   });
 

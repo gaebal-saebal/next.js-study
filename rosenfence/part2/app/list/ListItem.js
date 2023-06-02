@@ -9,13 +9,16 @@ export default function ListItem({ lists }) {
       body: JSON.stringify({ _id: list._id, author: list.author }), //!
     })
       .then((res) => {
-        res.json();
+        return res.json();
       })
-      .then(() => {
-        e.target.parentElement.style.opacity = 0;
-        setTimeout(() => {
-          e.target.parentElement.style.display = 'none';
-        }, 1000);
+      .then((data) => {
+        // 삭제완료 response를 받았을 때에만 애니메이션 구현
+        if (data === '삭제완료') {
+          e.target.parentElement.style.opacity = 0;
+          setTimeout(() => {
+            e.target.parentElement.style.display = 'none';
+          }, 1000);
+        }
       })
       .catch(() => {
         console.log('오류');
@@ -29,7 +32,7 @@ export default function ListItem({ lists }) {
           <div className='list-item' key={i}>
             <Link className='link' href={`/detail/${list._id}`}>
               <h4>{list.title}</h4>
-              <p>{list.content}</p>
+              <p>{list.name}</p>
             </Link>
             <Link className='link' href={`/edit/${list._id}`}>
               수정
