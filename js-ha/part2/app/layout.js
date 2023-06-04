@@ -4,6 +4,7 @@ import LoginBtn from './LoginBtn';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 import LogoutBtn from './LogoutBtn';
+import SignUp from './SignUp';
 
 export const metadata = {
   title: 'Create Next App',
@@ -28,7 +29,10 @@ export default async function RootLayout({ children }) {
               {data.user.name} <LogoutBtn />
             </span>
           ) : (
-            <LoginBtn />
+            <span>
+              <LoginBtn />
+              <SignUp />
+            </span>
           )}
         </div>
         {children}

@@ -3,6 +3,7 @@ import { MongoDBAdapter } from '@next-auth/mongodb-adapter';
 import NextAuth from 'next-auth';
 import GithubProvider from 'next-auth/providers/github';
 import CredentialsProvider from 'next-auth/providers/credentials';
+import bcrypt from 'bcrypt';
 
 export const authOptions = {
   providers: [
@@ -52,7 +53,8 @@ export const authOptions = {
       if (user) {
         token.user = {}; //JWT에 기입할 정보
         token.user.name = user.name;
-        token.user.email = user.email;
+        token.user.email = user.email; // 로그아웃 해보고 다시 로그인 해야 추가한 정보 나옴
+        token.user.role = user.role;
       }
       return token;
     },

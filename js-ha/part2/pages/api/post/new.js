@@ -4,8 +4,8 @@ import { authOptions } from '../auth/[...nextauth]';
 
 export default async function handler(요청, 응답) {
   let info = await getServerSession(요청, 응답, authOptions);
-  console.log(info.user.email);
-  if (info) {
+
+  if (info.user.name !== null) {
     요청.body.author = info.user.email;
   }
   console.log(요청.body);
