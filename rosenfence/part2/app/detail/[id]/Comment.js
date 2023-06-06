@@ -1,11 +1,22 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const Comment = ({ postId }) => {
   const [comment, setComment] = useState('');
+  const [lists, setLists] = useState([]);
+
+  useEffect(() => {
+    fetch('/api/comment/list', { method: 'POST', body: postId })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        setLists(data);
+      });
+  }, []);
 
   const handleClick = () => {
-    fetch('/api/post/comment', {
+    fetch('/api/comment/new', {
       method: 'POST',
       body: JSON.stringify({ content: comment, parent: postId }),
     })
@@ -13,7 +24,7 @@ const Comment = ({ postId }) => {
         return res.json();
       })
       .then((data) => {
-        console.log(data);
+        setLists(data);
       })
       .catch(() => {
         console.log('오류발생');
@@ -22,7 +33,16 @@ const Comment = ({ postId }) => {
 
   return (
     <div>
-      <div>댓글목록보여줄부분</div>
+      <div>
+        {lists.map((list, i) => {
+          return (
+            <div key={i}>
+              <span>{list.content}</span>
+              <span>{list.author}</span>
+            </div>
+          );
+        })}
+      </div>
       <input
         onChange={(e) => {
           setComment(e.target.value);

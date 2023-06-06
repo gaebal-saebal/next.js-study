@@ -16,7 +16,11 @@ export default async function comment(req, res) {
         request.name = session.user.name;
         const db = (await connectDB).db('forum');
         const comment = await db.collection('comment').insertOne(request);
-        return res.status(200).json('댓글 작성완료');
+        const response = await db
+          .collection('comment')
+          .find({ parent: new ObjectId(request.parent) })
+          .toArray();
+        return res.status(200).json(response);
       }
       return res.status(500).json('내용이 없습니다');
     }
