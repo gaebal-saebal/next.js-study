@@ -12,7 +12,7 @@ export default async function Detail(props) {
       <h3>상세페이지</h3>
       <h4>{result.title}</h4>
       <p>{result.content}</p>
-      <Comment />
+      <Comment _id={result._id} />
     </div>
   );
 }
